@@ -90,7 +90,7 @@ export default function EstacionamientoForm() {
 
         <div className="flex items-center space-x-2">
           <input type="checkbox" id="subscribe" className="w-4 h-4 text-amber-600 border-gray-300 rounded focus:ring-amber-500" />
-          <label htmlFor="subscribe" className="text-sm text-gray-700">Suscribirse al blog de noticias</label>
+          <label htmlFor="subscribe" className="text-sm text-gray-700">Cupon de Estacionamiento Gratis</label>
         </div>
 
         <button type="submit" className="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-6 rounded-lg">
