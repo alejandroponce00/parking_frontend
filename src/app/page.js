@@ -15,7 +15,7 @@ export default function EstacionamientoForm() {
     const data = { vehiculo, patente, ubicacion };
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/estacionamientos/", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
