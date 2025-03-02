@@ -2,6 +2,8 @@
 
 Este es un frontend desarrollado en Next.js que permite ingresar un vehículo, su patente y ubicación a través de un formulario para ser almacenado en el backend. 🚀
 
+ 🖼️ Imagen de referencia
+![Captura de la base de datos](fronten_captura.png)
 📌 Características
 
 ✅ Formulario para ingresar vehículo, patente y ubicación.
@@ -40,8 +42,6 @@ npm run dev  # o yarn dev
 
 El frontend estará disponible en http://localhost:3000/
 
- 🖼️ Imagen de referencia
-![Captura de la base de datos](fronten_captura.png)
 
 
 
