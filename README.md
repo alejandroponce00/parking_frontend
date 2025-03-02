@@ -22,10 +22,7 @@ Este es un frontend desarrollado en Next.js que permite ingresar un vehículo, s
 
 🚀 Configuración del entorno
 
-Clonar el repositorio:
 
-git clone https://github.com/tu_usuario/tu_repositorio_frontend.git
-cd tu_repositorio_frontend
 
 Instalar dependencias:
 
