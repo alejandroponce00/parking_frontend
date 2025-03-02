@@ -40,7 +40,8 @@ npm run dev  # o yarn dev
 
 El frontend estará disponible en http://localhost:3000/
 
-🖼️ Imagen de referencia
+ 🖼️ Imagen de referencia
+![Captura de la base de datos](fronten_captura.png)
 
 
 
