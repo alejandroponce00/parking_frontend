@@ -32,10 +32,19 @@ export default function EstacionamientoForm() {
     return () => clearInterval(interval);
   }, []);
 
+  const [cuponGratis, setCuponGratis] = useState(false);
+  const [tarifa, setTarifa] = useState("0.00");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const data = { vehiculo, patente, ubicacion };
+    const data = { 
+      vehiculo, 
+      patente, 
+      ubicacion,
+      cupon_gratis: cuponGratis,
+      tarifa: tarifa
+    };
 
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}`, {
@@ -52,6 +61,8 @@ export default function EstacionamientoForm() {
         setVehiculo("");
         setPatente("");
         setUbicacion("");
+        setTarifa("0.00");
+        setCuponGratis(false);
         fetchAutos(); // Actualizar la lista después de un registro exitoso
       } else {
         setMensaje("Error al guardar los datos. Por favor, intente nuevamente.");
@@ -64,7 +75,7 @@ export default function EstacionamientoForm() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-2xl overflow-hidden p-8 border border-gray-300">
+    <div className="max-w-7xl mx-auto bg-white rounded-lg shadow-2xl overflow-hidden p-8 border border-gray-300">
       <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
         Registro de Estacionamiento
       </h2>
@@ -112,9 +123,32 @@ export default function EstacionamientoForm() {
           />
         </div>
 
-        <div className="flex items-center space-x-2">
-          <input type="checkbox" id="subscribe" className="w-4 h-4 text-amber-600 border-gray-300 rounded focus:ring-amber-500" />
-          <label htmlFor="subscribe" className="text-sm text-gray-700">Cupon de Estacionamiento Gratis</label>
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Tarifa por hora ($)
+            </label>
+            <input
+              type="number"
+              step="0.01"
+              min="0"
+              value={tarifa}
+              onChange={(e) => setTarifa(e.target.value)}
+              className="w-full px-4 py-2 border text-black border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+              placeholder="0.00"
+            />
+          </div>
+
+          <div className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              id="cuponGratis"
+              checked={cuponGratis}
+              onChange={(e) => setCuponGratis(e.target.checked)}
+              className="w-4 h-4 text-amber-600 border-gray-300 rounded focus:ring-amber-500"
+            />
+            <label htmlFor="cuponGratis" className="text-sm text-gray-700">Cupón de Estacionamiento Gratis</label>
+          </div>
         </div>
 
         <button type="submit" className="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-6 rounded-lg">
@@ -140,6 +174,8 @@ export default function EstacionamientoForm() {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Patente</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ubicación</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hora Ingreso</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tarifa ($)</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cupón Gratis</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
@@ -167,6 +203,18 @@ export default function EstacionamientoForm() {
                     <div className="flex items-center">
                       <Clock className="w-5 h-5 text-amber-500 mr-2" />
                       <span className="text-sm text-gray-900">{new Date(auto.fecha).toLocaleString()}</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center">
+                      <span className="text-sm text-gray-900">${auto.tarifa}</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center">
+                      <span className={`inline-flex px-2 text-xs font-semibold leading-5 rounded-full ${auto.cupon_gratis ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}`}>
+                        {auto.cupon_gratis ? 'Sí' : 'No'}
+                      </span>
                     </div>
                   </td>
                 </tr>
