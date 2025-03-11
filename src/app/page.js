@@ -33,7 +33,7 @@ export default function EstacionamientoForm() {
   }, []);
 
   const [cuponGratis, setCuponGratis] = useState(false);
-  const [tarifa, setTarifa] = useState("0.00");
+  const [tarifaPorHora, setTarifaPorHora] = useState("2.00");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,7 +43,7 @@ export default function EstacionamientoForm() {
       patente, 
       ubicacion,
       cupon_gratis: cuponGratis,
-      tarifa: tarifa
+      tarifa_por_hora: tarifaPorHora
     };
 
     try {
@@ -61,7 +61,7 @@ export default function EstacionamientoForm() {
         setVehiculo("");
         setPatente("");
         setUbicacion("");
-        setTarifa("0.00");
+        setTarifaPorHora("2.00");
         setCuponGratis(false);
         fetchAutos(); // Actualizar la lista después de un registro exitoso
       } else {
@@ -132,8 +132,8 @@ export default function EstacionamientoForm() {
               type="number"
               step="0.01"
               min="0"
-              value={tarifa}
-              onChange={(e) => setTarifa(e.target.value)}
+              value={tarifaPorHora}
+              onChange={(e) => setTarifaPorHora(e.target.value)}
               className="w-full px-4 py-2 border text-black border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
               placeholder="0.00"
             />
@@ -174,8 +174,10 @@ export default function EstacionamientoForm() {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Patente</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ubicación</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hora Ingreso</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tarifa ($)</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cupón Gratis</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tarifa/Hora</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tiempo</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total ($)</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cupón</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
@@ -207,11 +209,23 @@ export default function EstacionamientoForm() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
-                      <span className="text-sm text-gray-900">${auto.tarifa}</span>
+                      <span className="text-sm text-gray-900">${auto.tarifa_por_hora}</span>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
+                      <span className="text-sm text-gray-900">{auto.tiempo_estacionado}</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center">
+                      <span className={`text-sm font-medium ${auto.cupon_gratis ? 'text-green-600' : 'text-gray-900'}`}>
+                        ${auto.tarifa_actual}
+                      </span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center justify-center">
                       <span className={`inline-flex px-2 text-xs font-semibold leading-5 rounded-full ${auto.cupon_gratis ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}`}>
                         {auto.cupon_gratis ? 'Sí' : 'No'}
                       </span>
