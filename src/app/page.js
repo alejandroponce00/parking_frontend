@@ -163,9 +163,9 @@ export default function EstacionamientoForm() {
         </div>
       )}
       
-      {/* Lista de Autos */}
-      <div className="mt-8">
-        <h3 className="text-2xl font-bold text-gray-800 mb-4">Vehículos Registrados</h3>
+      {/* Lista de Autos */}<h3 className="text-2xl font-bold text-center mt-8 text-gray-800 mb-4">Vehículos Registrados</h3>
+      <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }} className="mt-8">
+        
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white border border-gray-300 rounded-lg">
             <thead className="bg-gray-50">
