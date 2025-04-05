@@ -47,7 +47,7 @@ export default function EstacionamientoForm() {
     };
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}`,{
         method: "POST",
         headers: {
           "Content-Type": "application/json",
