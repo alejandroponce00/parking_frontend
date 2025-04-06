@@ -9,7 +9,7 @@ export default function EstacionamientoForm() {
   const [mensaje, setMensaje] = useState("");
   const [status, setStatus] = useState(null);
   const [autos, setAutos] = useState([]);
-
+   
   const fetchAutos = async () => {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}`);
@@ -25,13 +25,14 @@ export default function EstacionamientoForm() {
       console.error('Error al obtener la lista de autos:', error);
     }
   };
-
+  
   useEffect(() => {
+    console.log("URL del backend:", process.env.NEXT_PUBLIC_BACKEND_URL);
     fetchAutos();
     const interval = setInterval(fetchAutos, 30000); // Actualizar cada 30 segundos
     return () => clearInterval(interval);
   }, []);
-
+  
   const [cuponGratis, setCuponGratis] = useState(false);
   const [tarifaPorHora, setTarifaPorHora] = useState("2.00");
 
